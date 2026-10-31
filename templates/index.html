@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>a small info</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f8f9fa;
+      color: #202122;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 60px 16px;
+    }
+
+    .card {
+      background: #fff;
+      width: 100%;
+      max-width: 640px;
+      padding: 32px;
+      border: 1px solid #a2a9b1;
+      border-radius: 4px;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: normal;
+      font-size: 32px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #a2a9b1;
+    }
+
+    .subtitle {
+      margin: 12px 0 24px;
+      color: #54595d;
+    }
+
+    form {
+      display: flex;
+      gap: 8px;
+    }
+
+    input {
+      flex: 1;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #a2a9b1;
+      border-radius: 2px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #3366cc;
+      box-shadow: inset 0 0 0 1px #3366cc;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      color: #fff;
+      background: #3366cc;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    button:hover { background: #2a4b8d; }
+    button:disabled { background: #a2a9b1; cursor: default; }
+
+    .answer {
+      margin-top: 28px;
+      padding-top: 16px;
+      border-top: 1px solid #eaecf0;
+      line-height: 1.6;
+    }
+
+    .answer h2 {
+      margin: 0 0 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: normal;
+      font-size: 22px;
+    }
+
+    .answer a {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #3366cc;
+      text-decoration: none;
+    }
+
+    .answer a:hover { text-decoration: underline; }
+
+    @media (max-width: 480px) {
+      .card { padding: 20px; }
+      form { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>PIECE OF INFO</h1>
+    <p class="subtitle">Ask a question and get a short answer.</p>
+
+    <form method="post" id="askForm">
+      <input name="question" placeholder="e.g. Who invented Python?" required autofocus>
+      <button type="submit" id="askBtn">Ask</button>
+    </form>
+
+    {% if answer %}
+    <div class="answer">
+      {% if title %}<h2>{{ title }}</h2>{% endif %}
+      <p style="margin:0">{{ answer }}</p>
+      {% if title %}
+        <a href="https://en.wikipedia.org/wiki/{{ title|replace(' ', '_') }}" target="_blank">
+          Read more on Wikipedia &rarr;
+        </a>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+
+  <script>
+    document.getElementById("askForm").addEventListener("submit", function () {
+      var btn = document.getElementById("askBtn");
+      btn.textContent = "Searching...";
+      btn.disabled = true;
+    });
+  </script>
+</body>
+</html>
