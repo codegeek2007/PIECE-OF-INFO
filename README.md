@@ -1,0 +1,18 @@
+# PIECE-OF-INFO
+
+A Flask web app that answers a question with a short summary from Wikipedia.
+
+## How it works
+1. You type a question.
+2. The app searches Wikipedia for the best matching article.
+3. It fetches that article's summary and shows the first two sentences.
+
+## Run locally
+```
+pip install -r requirements.txt
+python app.py
+```
+Then open http://127.0.0.1:5000 in your browser.
+
+## Tech
+Python, Flask, Requests, Wikipedia API
